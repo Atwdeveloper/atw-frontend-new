@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Check, ShieldCheck } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 
-const plans = [
+export const plans = [
   {
     id: "starter",
     label: "Starter Factories",
@@ -89,6 +90,7 @@ const headingVariants = {
 };
 
 export default function PricingSection() {
+  const navigate = useNavigate();
   return (
     <section className="bg-white min-h-screen py-16 px-4" id="pricing">
       {/* Header */}
@@ -224,6 +226,7 @@ export default function PricingSection() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
+                onClick={() => navigate(`/contact?plan=${plan.id}`)}
                 className={`w-full py-3 rounded-lg border text-sm font-semibold transition-colors duration-200 ${colors.btn}`}
               >
                 {plan.btnText}
@@ -232,6 +235,15 @@ export default function PricingSection() {
           );
         })}
       </motion.div>
+
+      <div className="mt-10 text-center">
+        <Link
+          to="/pricing"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-purple-600 hover:gap-3 transition-all"
+        >
+          Compare plans and estimate your fee <ArrowRight size={16} />
+        </Link>
+      </div>
     </section>
   );
 }

@@ -160,6 +160,17 @@ import {
   Linkedin,
 } from "lucide-react";
 import { useAuthContext } from "../../../common/context/AuthContext";
+import siteSettings from "../../../common/utils/siteSettings";
+
+// Fixed support number — shown even when the settings API is back on.
+const SUPPORT_PHONE = "+91 78772 83643";
+
+const companyLinks = [
+  { to: "/about", label: "About Us" },
+  { to: "/pricing", label: "Pricing" },
+  { to: "/faq", label: "FAQ" },
+  { to: "/contact", label: "Contact" },
+];
 
 const Footer = () => {
   const { settings } = useAuthContext();
@@ -189,16 +200,35 @@ const Footer = () => {
                 <span>{settings?.office_address}</span>
               </div>
 
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-green-400" />
-                <span>{settings?.support_email}</span>
-              </div>
+              <a
+                href={`mailto:${settings?.support_email || siteSettings.support_email}`}
+                className="flex items-center gap-3 hover:text-green-400 transition-colors"
+              >
+                <Mail size={18} className="text-green-400 flex-shrink-0" />
+                <span>{settings?.support_email || siteSettings.support_email}</span>
+              </a>
 
-              <div className="flex items-center gap-3">
-                <Phone size={18} className="text-green-400" />
-                <span>{settings?.support_phone}</span>
-              </div>
+              <a
+                href={`tel:${SUPPORT_PHONE.replace(/\s/g, "")}`}
+                className="flex items-center gap-3 hover:text-green-400 transition-colors"
+              >
+                <Phone size={18} className="text-green-400 flex-shrink-0" />
+                <span>{SUPPORT_PHONE}</span>
+              </a>
             </div>
+          </div>
+
+          <div className="flex flex-col">
+            <h3 className="text-xl font-semibold">Company</h3>
+            <ul className="py-6 text-sm leading-7 space-y-2">
+              {companyLinks.map(({ to, label }) => (
+                <li key={to}>
+                  <Link to={to} className="hover:text-green-400 transition-colors duration-300">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="flex flex-col">
@@ -295,12 +325,7 @@ const Footer = () => {
         <div className="border-t border-white/10 mt-10 pt-5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>© {new Date().getFullYear()} Anytime Work. All Rights Reserved.</p>
 
-          <p className="mt-3 md:mt-0">
-            Developed by{" "}
-            <a href="https://www.logicspice.com"> <span className="font-sm hover:text-green-400 transition-colors duration-600">
-              LogicSpice Consultancy Pvt. Ltd.
-            </span> </a>
-          </p>
+          <p className="mt-3 md:mt-0">Developed by Anytime Global Pvt. Ltd.</p>
         </div>
       </div>
     </footer>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, CheckCircle2 } from "lucide-react";
+import { Phone, CheckCircle2, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
@@ -147,6 +147,13 @@ const AboutUs = () => {
             {/* CTA ROW */}
             <div className="flex flex-wrap items-center gap-6">
               {/* BUTTON */}
+              <button
+                type="button"
+                onClick={() => navigate("/about")}
+                className="inline-flex items-center gap-2 rounded-xl bg-[#1a2a4a] px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
+              >
+                More about us <ArrowRight size={16} />
+              </button>
 
               {/* CALL */}
               <div className="flex items-center gap-3">

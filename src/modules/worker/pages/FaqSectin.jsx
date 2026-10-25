@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const faqs = [
+export const faqs = [
   {
     question: "Do you offer a free, no obligation quotation?",
     answer:
@@ -135,6 +136,12 @@ const FAQSection = () => {
                 </div>
               );
             })}
+            <Link
+              to="/faq"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-purple-600 hover:gap-3 transition-all"
+            >
+              View all FAQs <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </div>

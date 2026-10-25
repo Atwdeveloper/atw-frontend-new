@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   CalendarDays,
-  ChevronRight,
   Cookie,
   Mail,
   MessageSquareWarning,
@@ -13,6 +12,7 @@ import {
   Scale,
   ShieldCheck,
 } from "lucide-react";
+import PageBanner from "../../../../common/components/PageBanner";
 import LandingHeader from "../../../worker/pages/LeandingHeader";
 import LeadingFooter from "../../../worker/pages/LeandingFooter";
 import { useAuthContext } from "../../../../common/context/AuthContext";
@@ -158,7 +158,6 @@ const LegalLayout = ({ title, children }) => {
 
   const current = policies.find((p) => p.to === pathname) || policies[0];
   const others = policies.filter((p) => p.to !== current.to);
-  const Icon = current.icon;
 
   const toc = Children.toArray(children)
     .filter((child) => isValidElement(child) && child.type === Section)
@@ -191,55 +190,25 @@ const LegalLayout = ({ title, children }) => {
     <>
       <LandingHeader />
 
-      {/* BANNER */}
-      <section className="relative overflow-hidden bg-[#0d1b35] pt-[74px]">
-        <img
-          src={current.image}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d1b35] via-[#0d1b35]/85 to-[#2a1b5e]/60" />
-        <div className="absolute -top-24 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
-        <div className="absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-orange-400/10 blur-3xl" />
-
-        <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-12 pb-28 md:pt-16 md:pb-36">
-          <nav className="flex flex-wrap items-center gap-1 text-sm text-white/60 mb-8" aria-label="Breadcrumb">
-            <Link to="/" className="hover:text-white transition-colors">Home</Link>
-            <ChevronRight size={14} />
-            <span>Support & Legal</span>
-            <ChevronRight size={14} />
-            <span className="text-white">{title}</span>
-          </nav>
-
-          <motion.div
-            className="max-w-3xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 via-purple-500 to-cyan-400 text-white shadow-lg">
-              <Icon size={26} />
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
-              {title}
-            </h1>
-            <p className="text-lg text-gray-300 max-w-2xl mb-8">{current.summary}</p>
-
-            <div className="flex flex-wrap gap-3 text-sm">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white/90 backdrop-blur-sm">
-                <CalendarDays size={15} className="text-[#FFB703]" />
-                Effective: <Blank k="effectiveDate" />
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white/90 backdrop-blur-sm">
-                <CalendarDays size={15} className="text-[#FFB703]" />
-                Last updated: <Blank k="lastUpdated" />
-              </span>
-            </div>
-          </motion.div>
+      <PageBanner
+        image={current.image}
+        breadcrumbs={[{ label: "Support & Legal" }, { label: title }]}
+        icon={current.icon}
+        title={title}
+        subtitle={current.summary}
+        overlap
+      >
+        <div className="flex flex-wrap gap-3 text-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white/90 backdrop-blur-sm">
+            <CalendarDays size={15} className="text-[#FFB703]" />
+            Effective: <Blank k="effectiveDate" />
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white/90 backdrop-blur-sm">
+            <CalendarDays size={15} className="text-[#FFB703]" />
+            Last updated: <Blank k="lastUpdated" />
+          </span>
         </div>
-
-        <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-orange-400 via-purple-500 to-cyan-400" />
-      </section>
+      </PageBanner>
 
       {/* BODY */}
       <div className="bg-gray-50 px-4 md:px-6 pb-20">

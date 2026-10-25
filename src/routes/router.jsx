@@ -82,6 +82,10 @@ import WorkerLogin from "../modules/worker/pages/WorkerLogin";
 import WorkerSignup from "../modules/worker/pages/WorkerSignup";
 import WorkerFaceRegistration from "../modules/worker/pages/WorkerFaceRegistration";
 import HomePage from "../modules/worker/pages/HomePage";
+import AboutPage from "../modules/worker/pages/site/AboutPage";
+import PricingPage from "../modules/worker/pages/site/PricingPage";
+import FaqPage from "../modules/worker/pages/site/FaqPage";
+import ContactPage from "../modules/worker/pages/site/ContactPage";
 import VendorManagement from "../modules/admin/pages/VendorManagement/VendorManagement";
 import VendorOrders from "../modules/admin/pages/VendorManagement/VendorOrders";
 import EditVendor from "../modules/admin/pages/VendorManagement/EditVendor";
@@ -470,6 +474,10 @@ const backendRoutes = [
 
 const publicRoutes = [
   { path: "/", element: <HomePage /> },
+  { path: "/about", element: <AboutPage /> },
+  { path: "/pricing", element: <PricingPage /> },
+  { path: "/faq", element: <FaqPage /> },
+  { path: "/contact", element: <ContactPage /> },
   { path: "/privacy", element: <PrivacyPolicy /> },
   { path: "/terms", element: <Terms /> },
   // Cancellation is now part of the Refund & Cancellation Policy.
