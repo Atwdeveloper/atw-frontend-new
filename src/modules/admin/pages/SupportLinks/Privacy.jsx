@@ -1,343 +1,185 @@
-import { useEffect } from "react";
-import LandingHeader from "../../../worker/pages/LeandingHeader";
-import LeadingFooter from "../../../worker/pages/LeandingFooter";
+import { Link } from "react-router-dom";
+import LegalLayout, { Blank, Section, Bullets, LegalTable } from "./LegalLayout";
 
-const PrivacyPolicy = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const linkClass = "text-blue-600 hover:underline";
 
-  return (
-    <>
-      <LandingHeader />
-      <div className="min-h-screen bg-gray-50 pt-28 pb-16">
-        <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Privacy Policy
-          </h1>
-          {/* <p className="text-xl font-medium text-gray-600 mb-2">
-            (Anytime Global Pvt. Ltd.)
-          </p> */}
+const PrivacyPolicy = () => (
+  <LegalLayout title="Privacy Policy">
+    <Section title="1. About this policy">
+      <p>
+        Anytime Global Private Limited ("ATW") respects your privacy. This policy explains what
+        personal data we collect, why, who we share it with, how long we keep it, and your rights
+        under the Digital Personal Data Protection Act, 2023 ("DPDP Act").
+      </p>
+      <p>
+        ATW is the <strong className="text-gray-900">Data Fiduciary</strong> for personal data
+        collected through anytimework.in and the ATW apps.
+      </p>
+    </Section>
 
-          <p className="text-gray-500 mb-10">
-            <strong>Last Updated:</strong> June 26, 2026
-          </p>
+    <Section title="2. What we collect and why">
+      <LegalTable
+        headers={["Data", "Whose", "Why we need it"]}
+        rows={[
+          ["Name, mobile number, date of birth, address, gender", "Workers, company contacts, agents", "Create your account, contact you, check age (18+)"],
+          ["Aadhaar (via OTP or document), PAN", "Workers", "Verify identity; EPF and ESIC registration as required by law"],
+          ["Live photo taken in the app", "Workers", "Profile and ID card; matching your face to your identity"],
+          ["Face template (a mathematical code made from your face)", "Workers", "Marking attendance at the work site"],
+          ["Bank account and IFSC", "Workers, agents", "Paying wages and withdrawals; we check the account is in your name"],
+          ["UAN, ESIC number, nominee details", "Workers", "EPF and ESIC contributions and nomination"],
+          ["Attendance times, work output, wages, deductions", "Workers", "Calculating and paying wages; wage slips; statutory filings"],
+          ["Saved work location", "Workers", "Showing nearby vacancies"],
+          ["Company name, GSTIN, address, billing details", "Client Companies", "Contracts, invoices, GST and TDS"],
+          ["Device, IP address, app version, login times", "All users", "Security, fraud prevention, fixing problems"],
+          ["Messages and complaints you send us", "All users", "Answering you and resolving issues"],
+        ]}
+      />
+      <p>
+        We collect only what we need for these purposes. We do not sell your personal data, and we do
+        not use it for advertising by others.
+      </p>
+    </Section>
 
-          <div className="space-y-8 text-gray-700 leading-8">
-            <section className="border-b border-gray-100 pb-6">
-              <p>
-                ("Anytime Work", "ATW", "Anytime Global", "we," "our," or "us") is committed to protecting your
-                privacy. This Privacy Policy explains how your personal information is collected, used, and
-                disclosed by Anytime Work. This Privacy Policy applies to our website,{" "}
-                <strong className="text-gray-900">anytimework.in</strong>, and its
-                associated subdomains (collectively, our "Service") alongside our application,{" "}
-                <span className="text-gray-600">anytimework.in/worker</span>,{" "}
-                <span className="text-gray-600">anytimework.in/company</span>, and{" "}
-                <span className="text-gray-600">anytimework.in/agent</span>. By accessing or using
-                our Service, you signify that you have read, understood, and agree to our collection, storage,
-                use, and disclosure of your personal information as described in this Privacy Policy and our
-                Terms of Service.
-              </p>
-            </section>
+    <Section title="3. Face data">
+      <p>
+        Your face is used <strong className="text-gray-900">only</strong> to confirm your identity
+        and record your attendance. We store a face template, not a video. Your face data is never
+        shared with Client Companies or any outside party, and never used for any other purpose.
+      </p>
+      <p>
+        We delete your face template within <Blank k="faceTemplateDeleteDays" /> days after you leave
+        ATW, unless the law requires us to keep it.
+      </p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Definitions and key terms
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  <strong className="text-gray-900">Cookie:</strong> small amount of data generated by a website and saved by your web browser. It is used to identify your browser, provide analytics, and remember information about you such as your language preference or login information.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Company:</strong> when this policy mentions "Company," "we," "ATW", "us," or "our," it refers to <strong className="text-gray-900">ANYTIME GLOBAL PVT LTD</strong>, Kh 04, Village- Dabara, Didwana, Nagaur- 341506, Rajasthan that is responsible for your information under this Privacy Policy.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Country:</strong> where Anytime Global, Anytime Work, Anytime Global Business, Anytime Work Business, Anytime Global Partner, Anytime Work Partner, Anytime Work Company, Anytime Global Company, Anytime Work Worker, Anytime Global Worker, Anytime Work Agent, Anytime Global Agent or the owners/founders of Anytime Global, Anytime Global Business, Anytime Global Partner are based, in this case is India.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Customer:</strong> refers to the company, organization or person that signs up to use the Anytime Work, Company & Agent/Partner Service to manage the relationships with your consumers or service users.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Device:</strong> any internet connected device such as a phone, tablet, computer or any other device that can be used to visit Anytime Work, Company & Agent/Partner and use the services.
-                </li>
-                <li>
-                  <strong className="text-gray-900">IP address:</strong> Every device connected to the Internet is assigned a number known as an Internet protocol (IP) address. These numbers are usually assigned in geographic blocks. An IP address can often be used to identify the location from which a device is connecting to the Internet.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Personnel:</strong> refers to those individuals who are employed by Anytime Work, Company & Agent/Partner or are under contract to perform a service on behalf of one of the parties.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Personal Data:</strong> any information that directly, indirectly, or in connection with other information — including a personal identification number — allows for the identification or identifiability of a natural person.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Service:</strong> refers to the service provided by Anytime Work, Company & Agent/Partner as described in the relative terms (if available) and on this platform.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Website:</strong> Anytime Work, Company & Agent/Partner's & Worker site, which can be accessed via this URL: <strong className="text-gray-900">anytimework.in</strong>.
-                </li>
-                <li>
-                  <strong className="text-gray-900">You:</strong> a person or entity that is registered with Anytime Work, Company & worker & Agent/Partner to use the Services.
-                </li>
-              </ul>
-            </section>
+    <Section title="4. Consent and legal basis">
+      <p>
+        We process your data with your consent, which you give when you register and accept this
+        policy, and where the law allows us to process it without consent — for example, to meet our
+        obligations as your employer under EPF, ESIC, wage and tax laws.
+      </p>
+      <p>
+        You may withdraw your consent at any time (see section 9). Withdrawing consent does not affect
+        processing already done. If you withdraw consent for data we need to employ and pay you (such
+        as identity, bank or face data), we may not be able to continue offering you work.
+      </p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                What information do we collect?
-              </h2>
-              <div className="space-y-4">
-                <p>
-                  1. We collect different types of personal data about you. This includes, but is not limited to:
-                </p>
-                <ul className="list-disc pl-8 space-y-3">
-                  <li>
-                    <strong className="text-gray-900">Contact Data:</strong> such as your mailing or home address, location, email addresses, and mobile numbers.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Identity and Profile Data:</strong> such as your name, username or similar identifiers, photographs, and gender.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Marketing and Communications Data:</strong> such as your address, email address, information posted in service requests, offers, wants, feedback, comments, pictures and discussions in our blog and chat boxes, responses to user surveys and polls, your preferences in receiving marketing communications from us and our third parties, and your communication preferences. We also collect your chat and call records when you communicate with service professionals through the Platform.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Technical Data:</strong> which includes your IP address, browser type, internet service provider, details of operating system, access time, page views, device ID, device type, frequency of visiting our website and use of the Platform, website and mobile application activity, clicks, date and time stamps, location data, and other technology on the devices that you use to access the Platform.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Transaction Data:</strong> such as details of the Services or Professional Services you have availed, a limited portion of your credit or debit card details for tracking transactions that are provided to us by payment processors, and UPI IDs for processing payments.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Usage Data:</strong> which includes information about how you use the Services and Professional Services, your activity on the Platform, booking history, user taps and clicks, user interests, time spent on the Platform, details about user journey on the mobile application, and page views.
-                  </li>
-                </ul>
-                <p>
-                  2. We also collect, use, and share aggregated data such as statistical or demographic data for any purpose. Aggregated data could be derived from your personal data but is not considered personal data under law as it does not directly or indirectly reveal your identity. However, if we combine or connect aggregated data with your personal data so that it can directly or indirectly identify you, we treat the combined data as personal data which will be used in accordance with this Policy.
-                </p>
-                <p>
-                  3. Where we need to collect personal data by law, or under the terms of a contract (such as the Terms), and you fail to provide that data when requested, we may not be able to perform the contract (for example, to provide you with the Services). In this case, we may have to cancel or limit your access to the Services.
-                </p>
-              </div>
-            </section>
+    <Section title="5. Who we share data with">
+      <LegalTable
+        headers={["Recipient", "What they get", "Why"]}
+        rows={[
+          ["Client Company where you work", "Name, photo, designation, attendance, work output", <>Supervising your work. They <strong className="text-gray-900">do not</strong> see your Aadhaar, PAN or bank details.</>],
+          ["EPFO and ESIC", "Details required by law", "Registering you and paying contributions"],
+          ["Banks and payment partners", "Name, bank account, amount", "Paying wages and withdrawals"],
+          ["Identity verification partners", "Aadhaar/PAN details you provide", "Checking your identity and bank account"],
+          ["SMS and WhatsApp providers", "Mobile number and message", "Sending OTPs, job offers and alerts"],
+          ["Cloud hosting provider", "Stored data, encrypted", "Running the Platform"],
+          ["Government or courts", "As legally required", "Complying with law or a lawful order"],
+        ]}
+      />
+      <p>
+        Every partner who processes data for us is bound by a contract to use it only for our purpose
+        and keep it secure. Our automated job-call voice service receives{" "}
+        <strong className="text-gray-900">no personal data</strong> about you.
+      </p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                How do we collect personal data?
-              </h2>
-              <div className="space-y-4">
-                <p>We use different methods to collect personal data from and about you including through:</p>
-                <ul className="list-decimal pl-8 space-y-4">
-                  <li>
-                    <strong className="text-gray-900">Direct Interactions:</strong> provide us your personal data when you interact with us. This includes personal data you provide when you:
-                    <ul className="list-disc pl-6 mt-2 space-y-1">
-                      <li>create an account or profile with us.</li>
-                      <li>use our Services or carry out other activities in connection with the Services.</li>
-                      <li>enter a promotion, user poll, or online surveys.</li>
-                      <li>request marketing communications to be sent to you.</li>
-                      <li>report a problem with the Platform and/or our Services, give us feedback or contact us.</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Automated technologies or interactions:</strong> Each time you visit the Platform or use the Services, we will automatically collect Technical Data about your equipment, browsing actions, and patterns. We collect this personal data by using cookies, web beacons, pixel tags, server logs, and other similar technologies. We may also receive Technical Data about you if you visit other websites or apps that employ our cookies.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Third parties or publicly available sources:</strong> We will receive personal data about you from various third parties:
-                    <ul className="list-disc pl-6 mt-2 space-y-1">
-                      <li>Technical data from analytics providers such as Facebook and advertising networks.</li>
-                      <li>Identity and profile-related Data and Contact Data from service professionals, publicly available sources, etc.</li>
-                      <li>Personal data about you from our affiliate entities.</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </section>
+    <Section title="6. Where your data is stored">
+      <p>
+        Your data is stored on secure servers located in <Blank k="dataServerLocation" />. If we ever
+        need to transfer data outside India, we will do so only as permitted under the DPDP Act.
+      </p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                How do we use the information we collect?
-              </h2>
-              <div className="space-y-4">
-                <p>
-                  1. We will only use your personal data when the law allows us to. Most commonly, we will use your personal data where we need to provide you with the Services, enable you to use the Professional Services, or where we need to comply with a legal obligation. We use your personal data for the following purposes:
-                </p>
-                <ul className="list-disc pl-8 space-y-2">
-                  <li>to verify your identity to register you as a user, and create your user account with us on the Platform.</li>
-                  <li>to provide the Services to you.</li>
-                  <li>to enable the provision of Professional Services to you.</li>
-                  <li>to monitor trends and personalise your experience.</li>
-                  <li>to improve the functionality of our Services based on the information and feedback we receive from you.</li>
-                  <li>to improve customer service to effectively respond to your Service requests and support needs.</li>
-                  <li>to track transactions and process payments.</li>
-                  <li>to send periodic notifications to manage our relationship with you including to notify you of changes to the Services, send you information and updates pertaining to the Services you have availed, and to receive occasional company news and updates related to us or the Services.</li>
-                  <li>to assist with the facilitation of the Professional Services offered to you, including to send you information and updates about the Professional Services you have availed.</li>
-                  <li>to market and advertise the Services to you.</li>
-                  <li>to comply with legal obligations.</li>
-                  <li>to administer and protect our business and the Services, including for troubleshooting, data analysis, system testing, and performing internal operations.</li>
-                  <li>to improve our business and delivery models.</li>
-                  <li>to perform our obligations that arise out of the arrangement we are about to enter or have entered with you.</li>
-                  <li>to enforce our Terms.</li>
-                  <li>to respond to court orders, establish or exercise our legal rights, or defend ourselves against legal claims.</li>
-                </ul>
-                <p>
-                  2. You agree and acknowledge that by using our Services and creating an account with us on the Platform, you authorise us, our service professionals, associate partners, and affiliates to contact you via email, phone, or otherwise. This is to provide the Services to you and ensure that you are aware of all the features of the Services and for related purposes.
-                </p>
-                <p>
-                  3. You agree and acknowledge that any and all information pertaining to you, whether or not you directly provide it to us (via the Services or otherwise), including but not limited to personal correspondence such as emails, instructions from you, etc., may be collected, compiled, and shared by us in order to render the Services to you. This may include but not be limited to service professionals who provide or seek to provide you with Professional Services, vendors, social media companies, third-party service providers, storage providers, data analytics providers, consultants, lawyers, and auditors. We may also share this information with other entities in the ATW Company group in connection with the above-mentioned purposes.
-                </p>
-                <p>
-                  4. You agree and acknowledge that we may share data without your consent, when it is required by law or by any court or government agency or authority to disclose such information. Such disclosures are made in good faith and belief that it is reasonably necessary to do so for enforcing this Policy or the Terms, or in order to comply with any applicable laws and regulations.
-                </p>
-              </div>
-            </section>
+    <Section title="7. How long we keep data">
+      <Bullets
+        items={[
+          <>Account and profile data: while your account is active, and up to <Blank k="accountRetention" /> after closure.</>,
+          <>Wage, attendance, EPF and ESIC records: for the period required by labour and tax laws (<Blank k="statutoryRetentionYears" /> years).</>,
+          <>Face template: deleted within <Blank k="faceTemplateDeleteDays" /> days after you leave (section 3).</>,
+          <>Security logs: <Blank k="securityLogMonths" /> months.</>,
+        ]}
+      />
+      <p>After these periods, data is deleted or made anonymous.</p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Cookies
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  Cookies are small files that a site or its service provider transfers to your device's hard drive through your web browser (if you permit it to) that enables the sites or service providers systems to recognise your browser and capture and remember certain information.
-                </li>
-                <li>
-                  We use cookies to help us distinguish you from other users of the Platform, understand and save your preferences for future visits, keep track of advertisements and compile aggregate data about site traffic and site interaction so that we can offer you a seamless user experience. We may contact third-party service providers to assist us in better understanding our site visitors. These service providers are not permitted to use the information collected on our behalf except to help us conduct and improve our business.
-                </li>
-                <li>
-                  Additionally, you may encounter cookies or other similar devices on certain pages of the Platform that are placed by third parties. We do not control the use of cookies by third parties. If you send us personal correspondence, such as emails, or if other users or third parties send us correspondence about your activities or postings on the Platform, we may collect such information within a file specific to you.
-                </li>
-              </ul>
-            </section>
+    <Section title="8. How we protect your data">
+      <Bullets
+        items={[
+          "Aadhaar, PAN, UAN, ESIC and bank numbers are encrypted and shown only in masked form (for example, XXXX XXXX 1234).",
+          "Staff can see only the data needed for their role, and only for their assigned area. Every access to sensitive data is logged.",
+          "Logins use one-time passwords; sessions expire automatically.",
+          "If a data breach affects you, we will inform you and the Data Protection Board of India as required by law.",
+        ]}
+      />
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Disclosures of your personal data
-              </h2>
-              <div className="space-y-4">
-                <p>
-                  We may share your personal data with third parties set out below for the purposes set out in our usage conditions:
-                </p>
-                <ul className="list-disc pl-8 space-y-3">
-                  <li>
-                    <strong className="text-gray-900">Service professionals:</strong> to enable them to provide you with Professional Services.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">Internal third parties:</strong> which are other companies within the ATW Company group of companies.
-                  </li>
-                  <li>
-                    <strong className="text-gray-900">External third parties:</strong> such as:
-                    <ul className="list-decimal pl-6 mt-2 space-y-2">
-                      <li>trusted third parties such as our associate partners, and service providers that provide services for us or on our behalf. This includes hosting and operating our Platform, providing marketing assistance, conducting our business, processing payments and transaction-related processes, transmitting content, and providing our Services to you.</li>
-                      <li>analytic service providers and advertising networks that conduct web analytics for us to help us improve the Platform. These analytics providers may use cookies and other technologies to perform their services.</li>
-                      <li>other registered users on our Platform upon your request or where you explicitly consent to such disclosure.</li>
-                      <li>regulators and other bodies, as required by law or regulation.</li>
-                    </ul>
-                  </li>
-                </ul>
-                <p>
-                  We require all third parties to respect the security of your personal data and to treat it in accordance with the law. We do not allow our third-party service providers to use your personal data for their own purposes and only permit them to process your personal data for specified purposes and in accordance with our instructions.
-                </p>
-              </div>
-            </section>
+    <Section title="9. Your rights">
+      <p>Under the DPDP Act, you have the right to:</p>
+      <Bullets
+        ordered
+        items={[
+          <><strong className="text-gray-900">Access</strong> — get a summary of your personal data we hold and who we have shared it with.</>,
+          <><strong className="text-gray-900">Correction</strong> — ask us to correct or update inaccurate data.</>,
+          <><strong className="text-gray-900">Erasure</strong> — ask us to delete data we no longer need, except records the law requires us to keep.</>,
+          <><strong className="text-gray-900">Withdraw consent</strong> — at any time, as easily as you gave it.</>,
+          <><strong className="text-gray-900">Grievance</strong> — complain to our Grievance Officer (section 11).</>,
+          <><strong className="text-gray-900">Nominate</strong> — name someone to exercise these rights if you die or become unable to.</>,
+        ]}
+      />
+      <p>To use any right, go to Profile → Privacy in the app, or contact our Grievance Officer.</p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Your rights in the relation to your personal data
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  <strong className="text-gray-900">Access and Updating your Personal Data:</strong> You hereby warrant that all personal data that you provide us with is accurate, up-to-date, and true. When you use our Services, we make best efforts to provide you with the ability to access and correct inaccurate or deficient data, subject to any legal requirements. You can request the ATW Company for a copy of your personal data by sending an email to <a href="mailto:hello@anytimework.in" className="text-blue-600 hover:underline">hello@anytimework.in</a>. ATW Company may take up to 7 (seven) working days to respond to such a request.
-                </li>
-                <li>
-                  <strong className="text-gray-900">Opting-out of Marketing and Promotional Communications:</strong> When we send you marketing and promotional content through email, we make best efforts to provide you with the ability to opt-out of such communications by using the opt-out instructions provided in such emails. You understand and acknowledge that it may take us up to 10 (Ten) business days to give effect to your opt-out request. Please note that we may still send you emails about your user account or any Services you have requested or received from us.
-                </li>
-              </ul>
-            </section>
+    <Section title="10. Children">
+      <p>
+        The Platform is only for people aged 18 and above. We do not knowingly register anyone under
+        18. If we learn that someone under 18 has registered, we will close the account and delete the
+        data, except where the law requires us to keep it.
+      </p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Deletion of account & personal data
-              </h2>
-              <p>
-                Notwithstanding anything contained in the Terms, you may delete your account as well as your personal data stored with the ATW Company by sending an email to <a href="mailto:hello@anytimework.in" className="text-blue-600 hover:underline">hello@anytimework.in</a>. ATW Company may take up to 30 (thirty) working days to process your request. Once your account is deleted, you will lose access to all Services. For avoidance of doubt, it is hereby clarified that all data with respect to transactions performed by you on the Platform will be retained in accordance with applicable law.
-              </p>
-            </section>
+    <section className="bg-gray-100 p-6 md:p-8 rounded-2xl">
+      <h2 className="text-2xl font-bold text-gray-900 mb-4">11. Grievance Officer</h2>
+      <p>
+        Name: <Blank k="grievanceOfficerName" />
+        <span className="mx-2">·</span>Designation: <Blank k="grievanceOfficerDesignation" />
+      </p>
+      <p>
+        Email: <Blank k="grievanceOfficerEmail" />
+        <span className="mx-2">·</span>Phone: <Blank k="grievanceOfficerPhone" />
+      </p>
+      <p className="mb-4">
+        Address: Anytime Global Private Limited, <Blank k="registeredOffice" />, Jaipur, Rajasthan
+      </p>
+      <p>
+        We will acknowledge your complaint within <Blank k="grievanceAckDays" /> days and resolve it
+        within <Blank k="grievanceResolveDays" /> days. If you are not satisfied with our response,
+        you may complain to the <strong className="text-gray-900">Data Protection Board of India</strong>.
+      </p>
+    </section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Transfer of personal data
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  We comply with applicable laws in respect of storage and transfers of personal data. As a part of your use of the Services, the information and personal data you provide to us may be transferred to and stored in countries other than the country you are based in. This may happen if any of our servers are from time to time located in a country other than the one you are based on, or one of our vendors, partners, or service providers is located in a country other than one you are based in.
-                </li>
-                <li>
-                  By submitting your information and personal data to us, you agree to the transfer, storage, and processing of such information and personal data in the manner described above.
-                </li>
-              </ul>
-            </section>
+    <Section title="12. Cookies">
+      <p>
+        Our website uses cookies. See our <Link to="/cookies" className={linkClass}>Cookie Policy</Link>{" "}
+        for details.
+      </p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Data security
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  We implement appropriate security measures and privacy-protective features on our Platform including encryption, password protection, call masking, and physical security measures to protect your personal data from unauthorised access, disclosure, and follow standards prescribed by applicable law.
-                </li>
-                <li>
-                  Where you have chosen a password that enables you to access certain parts of the Services or Professional Services, you are responsible for keeping this password secret and confidential. We will not be responsible for any unauthorised use of your information, or for any lost, stolen, or compromised passwords, or for any activity on your user account due to such unauthorised disclosure of your password. In the event your password has been compromised in any manner whatsoever, you should promptly notify us to enable us to initiate a change of password.
-                </li>
-              </ul>
-            </section>
+    <Section title="13. Changes to this policy">
+      <p>
+        We may update this policy. We will change the date at the top and, for important changes,
+        notify you in the app or by SMS/WhatsApp.
+      </p>
+    </Section>
 
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Data retention
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  You agree and acknowledge that your personal data will continue to be stored and retained by us for as long as necessary to fulfil our stated purpose(s) and for a reasonable period after the termination of your account or access to the Services to comply with our legal rights and obligations.
-                </li>
-                <li>
-                  In some circumstances, we may aggregate your personal data (so that it can no longer be associated with you) for research or statistical purposes, in which case we may use this information indefinitely without further notice to you.
-                </li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Business transitions
-              </h2>
-              <p>
-                You are aware that in the event we go through a business transition, such as a merger, acquisition by another organisation, or sale of all or a portion of our assets, your personal data might be among the assets transferred.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                User generated content
-              </h2>
-              <p>
-                We invite you to post content on our Platform, including your comments, feedback, pictures, or any other information that you would like to be made available on our Platform. Please note that such content will be available to all visitors to our Platform and may become public. We cannot prevent such information from being used in a manner that is contrary to this Policy, applicable laws, or your personal privacy, and we disclaim all liability (express or implied) in this regard. Further, you agree to comply with all applicable laws in relation to the content uploaded or otherwise shared by you on our Platform. You understand and acknowledge that you will be solely responsible for any information published by you on our Platform that violates applicable laws.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                Updated to the policy
-              </h2>
-              <ul className="space-y-4">
-                <li>
-                  We may occasionally update this Policy. If we make changes to this Policy, we will upload the revised policy on the Platform or share it with you through other means, such as as email. To the extent permitted under applicable law, by using our Platform after such notice, you consent to updates made to this Policy.
-                </li>
-                <li>
-                  We encourage you to periodically review this Policy for the latest information on our privacy practices.
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
-      </div>
-      <LeadingFooter />
-    </>
-  );
-};
+    <Section title="14. Language">
+      <p>
+        This policy is available in English and other languages. If there is any difference, the
+        English version applies.
+      </p>
+    </Section>
+  </LegalLayout>
+);
 
 export default PrivacyPolicy;

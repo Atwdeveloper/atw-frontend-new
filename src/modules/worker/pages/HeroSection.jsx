@@ -1,20 +1,54 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Building2Icon, User, Users } from "lucide-react";
+import {
+  Building2Icon,
+  ChevronLeft,
+  ChevronRight,
+  User,
+  Users,
+} from "lucide-react";
 import { useState, useEffect } from "react";
+import { BACKEND_ENABLED } from "../../../common/utils/features";
 
-const words = ["Construction", "Factory", "Warehouse", "Logistics", "Security"];
+const SLIDE_DURATION = 5000;
+
+const slides = [
+  {
+    image: "/images/landing/hero-construction.jpg",
+    alt: "Construction worker holding a safety helmet on site",
+    label: "Construction",
+    caption: "Skilled site workers, ready when you need them",
+  },
+  {
+    image: "/images/landing/hero-factory.jpg",
+    alt: "Two women working in a textile factory",
+    label: "Factory",
+    caption: "Compliant shop-floor staff with PF & ESI handled",
+  },
+  {
+    image: "/images/landing/hero-warehouse.jpg",
+    alt: "Woman sorting stock in a warehouse",
+    label: "Warehouse & Logistics",
+    caption: "Pickers, packers and loaders for every shift",
+  },
+];
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const [currentWord, setCurrentWord] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const [activeSlide, setActiveSlide] = useState(0);
 
+  // Restarts whenever the slide changes, so a manual pick gets the full time too.
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+    if (reduceMotion) return;
+    const timer = setTimeout(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, SLIDE_DURATION);
+    return () => clearTimeout(timer);
+  }, [activeSlide, reduceMotion]);
+
+  const goTo = (index) =>
+    setActiveSlide((index + slides.length) % slides.length);
 
   const [selectedRole, setSelectedRole] = useState(null);
 
@@ -52,14 +86,32 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-      {/* BACKGROUND IMAGE */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/images/slider.jpeg"
-          alt="Blue collar workers"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d1b35]/90 via-[#0d1b35]/70 to-[#0d1b35]/40"></div>
+      {/* BACKGROUND CAROUSEL — every slide stays mounted so they cross-fade
+          without a flash and the next image is already loaded */}
+      <div className="absolute inset-0 z-0 bg-[#0d1b35]">
+        {slides.map((slide, index) => (
+          <motion.img
+            key={slide.image}
+            src={slide.image}
+            alt={slide.alt}
+            aria-hidden={index !== activeSlide}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={false}
+            animate={{
+              opacity: index === activeSlide ? 1 : 0,
+              scale: index === activeSlide || reduceMotion ? 1 : 1.08,
+            }}
+            transition={{
+              opacity: { duration: 1.2, ease: "easeInOut" },
+              scale: { duration: SLIDE_DURATION / 1000 + 1.2, ease: "linear" },
+            }}
+          />
+        ))}
+        {/* Text is centred on phones, so the overlay is flat there; on wider
+            screens it fades out to the right to keep faces visible */}
+        <div className="absolute inset-0 bg-[#0d1b35]/75 md:hidden"></div>
+        <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-[#0d1b35]/95 via-[#0d1b35]/70 to-[#0d1b35]/10"></div>
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0d1b35]/90 to-transparent"></div>
       </div>
 
       {/* ANIMATED BACKGROUND CIRCLES */}
@@ -75,8 +127,8 @@ const HeroSection = () => {
       />
 
       {/* MAIN CONTENT */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
-        <div className="max-w-3xl mx-auto text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-48 w-full">
+        <div className="max-w-2xl text-center md:text-left">
           {/* Top Badge */}
           <motion.div
             className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 text-purple-300 text-sm px-5 py-2 rounded-full mb-8"
@@ -104,7 +156,7 @@ const HeroSection = () => {
 
           {/* Subtitle */}
           <motion.p
-            className="text-gray-300 text-xl leading-relaxed mb-10 max-w-2xl mx-auto"
+            className="text-gray-300 text-xl leading-relaxed mb-10 max-w-xl mx-auto md:mx-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -119,8 +171,9 @@ const HeroSection = () => {
             One platform — ATW.
           </motion.p>
 
-          {/* Role Cards */}
-          <div className="grid grid-cols-3 gap-4 mb-10 max-w-2xl mx-auto">
+          {/* Role Cards — these open the login pages, hidden until the backend is back */}
+          {BACKEND_ENABLED && (
+          <div className="grid grid-cols-3 gap-4 mb-10 max-w-2xl mx-auto md:mx-0">
             {Object.entries(roles).map(([key, role]) => {
               const Icon = role.icon;
               return (
@@ -145,6 +198,7 @@ const HeroSection = () => {
               );
             })}
           </div>
+          )}
 
           {/* CTA Buttons */}
           {/* <motion.div
@@ -170,6 +224,78 @@ const HeroSection = () => {
               📱 Download App
             </button>
           </motion.div> */}
+        </div>
+      </div>
+
+      {/* SLIDE CAPTION + CONTROLS */}
+      <div className="absolute bottom-24 inset-x-0 z-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="w-full max-w-sm mx-auto md:mx-0 text-center md:text-left">
+            <motion.div
+              key={activeSlide}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              aria-live="polite"
+            >
+              <p className="text-[#FFB703] text-xs font-semibold uppercase tracking-widest mb-1">
+                {slides[activeSlide].label}
+              </p>
+              <p className="text-white/80 text-sm">
+                {slides[activeSlide].caption}
+              </p>
+            </motion.div>
+
+            {/* Progress bars double as slide buttons */}
+            <div className="flex gap-2 mt-4">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.image}
+                  type="button"
+                  onClick={() => goTo(index)}
+                  aria-label={`Show ${slide.label} slide`}
+                  aria-current={index === activeSlide}
+                  className="h-1 flex-1 rounded-full bg-white/20 overflow-hidden"
+                >
+                  <motion.span
+                    // A fresh key on the active bar restarts its fill animation.
+                    key={index === activeSlide ? `active-${activeSlide}` : index}
+                    className="block h-full bg-[#FFB703] origin-left"
+                    initial={{
+                      scaleX: index < activeSlide || reduceMotion ? 1 : 0,
+                    }}
+                    animate={{ scaleX: index <= activeSlide ? 1 : 0 }}
+                    transition={{
+                      duration:
+                        index === activeSlide && !reduceMotion
+                          ? SLIDE_DURATION / 1000
+                          : 0,
+                      ease: "linear",
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden md:flex gap-3">
+            <button
+              type="button"
+              onClick={() => goTo(activeSlide - 1)}
+              aria-label="Previous slide"
+              className="w-11 h-11 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              type="button"
+              onClick={() => goTo(activeSlide + 1)}
+              aria-label="Next slide"
+              className="w-11 h-11 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
       </div>
 

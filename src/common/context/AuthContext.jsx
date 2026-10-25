@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { getAllSettingsAPI } from "../../api/getAllSettings";
+import { BACKEND_ENABLED } from "../utils/features";
+import siteSettings from "../utils/siteSettings";
 
 const AuthContext = createContext();
 
@@ -10,7 +12,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState(null);
   const [profileStatus, setProfileStatus] = useState(null);
-  const [settings, setSettings] = useState(null);
+  const [settings, setSettings] = useState(
+    BACKEND_ENABLED ? null : siteSettings,
+  );
   // Cookie configuration
   const cookieOptions = {
     expires: 7,
@@ -79,6 +83,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const allSettings = async () => {
+    if (!BACKEND_ENABLED) return;
     try {
       const response = await getAllSettingsAPI();
       if (response.status === 200 && response.data) {

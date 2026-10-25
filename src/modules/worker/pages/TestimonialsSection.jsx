@@ -15,7 +15,7 @@ const testimonials = [
     role: "Machine Operator",
     location: "Jaipur",
     duration: "6 months with ATW",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300",
+    image: "/images/landing/testimonial-rajesh.jpg",
     review:
       "मैं पिछले 6 महीनों से इस प्लेटफॉर्म से जुड़ा हूँ। सबसे अच्छी बात यह है कि काम खत्म होते ही हर दिन पेमेंट मिल जाती है।",
   },
@@ -25,7 +25,7 @@ const testimonials = [
     role: "Textile Worker",
     location: "Surat",
     duration: "4 months with ATW",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300",
+    image: "/images/landing/testimonial-sunita.jpg",
     review:
       "इस ऐप पर तुरंत काम मिलना बहुत आसान है। मुझे कई बार जाकर काम ढूंढने की जरूरत नहीं पड़ी।",
   },
@@ -35,7 +35,7 @@ const testimonials = [
     role: "Security Guard",
     location: "Rajkot",
     duration: "8 months with ATW",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300",
+    image: "/images/landing/testimonial-mahesh.jpg",
     review:
       "भारतभर में यह प्लेटफॉर्म केवल रोजगार नहीं दिलाता बल्कि भरोसे का दूसरा नाम बन चुका है।",
   },

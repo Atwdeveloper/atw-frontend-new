@@ -1,7 +1,8 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 /* ===== COMMON ===== */
 import ProtectedRoute from "../common/components/ProtectedRoute";
+import { BACKEND_ENABLED } from "../common/utils/features";
 import { PermissionProvider } from "../common/hooks/useAdminPermissions";
 import { CompanyPermissionProvider } from "../common/hooks/useCompanyPermissions";
 
@@ -178,14 +179,17 @@ import FaceAuthTestPage from "../modules/attendance/FaceAuthTestPage";
 import FaceIdentifyTestPage from "../modules/attendance/FaceIdentifyTestPage";
 import PrivacyPolicy from "../modules/admin/pages/SupportLinks/Privacy";
 import Terms from "../modules/admin/pages/SupportLinks/Terms";
-import CancellationPolicy from "../modules/admin/pages/SupportLinks/CancellationPolicy";
 import RefundPolicy from "../modules/admin/pages/SupportLinks/RefundPolicy";
+import CookiePolicy from "../modules/admin/pages/SupportLinks/CookiePolicy";
+import Grievance from "../modules/admin/pages/SupportLinks/Grievance";
 import ReferralDashboard from "../modules/admin/pages/referrals/ReferralDashboard";
 // import ManageReferral from "../modules/admin/pages/referrals/ManageReferral";
 // import ReferralSettings from "../modules/admin/pages/referrals/ReferralSettings";
 import ReferralRules from "../modules/admin/pages/referrals/ReferralRules";
 
-const router = createBrowserRouter([
+// Login, signup and dashboard routes. Every one of them talks to the API, so
+// they stay off while BACKEND_ENABLED is false.
+const backendRoutes = [
   /* ================= ADMIN ================= */
   { path: "/admin/login", element: <AdminLogin /> },
   {path: "/FaceAttendanceRegister",element: <FaceAttendanceRegister companyId="COMP-001" />},
@@ -440,7 +444,6 @@ const router = createBrowserRouter([
     path: "/worker/terms&conditions",
     element: <WorkerTermsAcceptance />,
   },
-  { path: "/", element: <HomePage /> },
   {
     path: "/worker",
     element: (
@@ -463,11 +466,22 @@ const router = createBrowserRouter([
       { path: "support", element: <WorkerSupport /> },
     ],
   },
+];
+
+const publicRoutes = [
+  { path: "/", element: <HomePage /> },
   { path: "/privacy", element: <PrivacyPolicy /> },
   { path: "/terms", element: <Terms /> },
-  { path: "/cancellation-policy", element: <CancellationPolicy /> },
+  // Cancellation is now part of the Refund & Cancellation Policy.
+  { path: "/cancellation-policy", element: <Navigate to="/refund-policy" replace /> },
   { path: "/refund-policy", element: <RefundPolicy /> },
+  { path: "/cookies", element: <CookiePolicy /> },
+  { path: "/grievance", element: <Grievance /> },
   { path: "*", element: <NotFoundPage /> },
-]);
+];
+
+const router = createBrowserRouter(
+  BACKEND_ENABLED ? [...backendRoutes, ...publicRoutes] : publicRoutes,
+);
 
 export default router;

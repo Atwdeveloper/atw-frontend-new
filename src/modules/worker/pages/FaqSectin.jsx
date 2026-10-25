@@ -62,8 +62,13 @@ const FAQSection = () => {
         <div className="flex flex-col lg:flex-row gap-10 items-start">
           {/* LEFT - IMAGES GRID */}
           <div className="lg:w-[45%] relative">
-            <div>
-              <img src="/images/agent1.webp" alt="agent" />
+            <div className="relative">
+              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-gradient-to-br from-[#7b74ff] to-[#4f46e5]"></div>
+              <img
+                src="/images/landing/agent.jpg"
+                alt="ATW agent at his laptop"
+                className="relative w-full aspect-square object-cover rounded-3xl shadow-xl"
+              />
             </div>
           </div>
 

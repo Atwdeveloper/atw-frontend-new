@@ -24,11 +24,12 @@ const AboutUs = () => {
             viewport={{ once: true }}
           >
             {/* MAIN IMAGE */}
-            <div className="rounded-2xl w-full">
+            <div className="relative">
+              <div className="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-[#FFB703]/20"></div>
               <img
-                src="/images/about-us-img.png"
-                alt="Anytime Work Team"
-                className="w-full h-full object-cover"
+                src="/images/landing/about-worker.jpg"
+                alt="Construction worker in a safety vest and helmet"
+                className="relative w-full aspect-[4/5] object-cover object-top rounded-3xl shadow-xl"
               />
             </div>
 

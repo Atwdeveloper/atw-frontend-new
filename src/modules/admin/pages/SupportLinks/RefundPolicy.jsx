@@ -1,204 +1,90 @@
-import { useEffect } from "react";
-import LandingHeader from "../../../worker/pages/LeandingHeader";
-import LeadingFooter from "../../../worker/pages/LeandingFooter";
+import { Link } from "react-router-dom";
+import LegalLayout, { Blank, Section, Bullets, LegalTable } from "./LegalLayout";
 
-const RefundPolicy = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const linkClass = "text-blue-600 hover:underline";
 
-  return (
-    <>
-      <LandingHeader />
-      <div className="min-h-screen bg-gray-50 pt-28 pb-16">
-        <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Refund Policy
-          </h1>
-          <p className="text-gray-500 mb-10">
-            <strong>Last Updated:</strong> June 26, 2026
-          </p>
+const RefundPolicy = () => (
+  <LegalLayout title="Refund & Cancellation Policy">
+    <Section title="1. Workers never pay ATW">
+      <p>
+        ATW does not charge Workers any fee for registering, applying or getting work. If anyone asks
+        you for money in ATW's name, do not pay, and report it to <Blank k="fraudReportContact" />.
+      </p>
+      <p>
+        The only charge a Worker may see is an optional withdrawal fee, explained in section 4. It is
+        always shown before you confirm.
+      </p>
+    </Section>
 
-          <div className="space-y-8 text-gray-700 leading-8">
-            {/* Section 1: COMPANY REFUND & LIABILITY POLICY */}
-            <section className="border-b border-gray-150 pb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                1. COMPANY REFUND & LIABILITY POLICY
-              </h2>
-              <p className="mb-4">
-                Welcome to Anytime Global Pvt. Ltd. This policy outlines the refunds you receive when a worker cancels, and your financial liabilities (payouts) to the worker if you cancel a vacancy late.
-              </p>
+    <Section title="2. Cancellation by Client Companies">
+      <p>
+        When a Client Company cancels a confirmed booking of Workers, a cancellation charge applies,
+        depending on how much notice is given before the shift starts:
+      </p>
+      <LegalTable
+        headers={["Notice before shift start", "Cancellation charge"]}
+        rows={[
+          ["More than 24 hours", "No charge"],
+          ["12 to 24 hours", <><Blank k="cancellationCharge12to24" />% of the booked day's wages for each cancelled Worker</>],
+          ["Less than 12 hours, or after Workers have reported", <><Blank k="cancellationChargeUnder12" />% of the booked day's wages for each cancelled Worker</>],
+        ]}
+      />
+      <p>
+        Cancellation charges are added to the next invoice. Part of the charge may be paid to the
+        affected Workers, as set out in the Rate Card. Rates in the signed Rate Card prevail over this
+        table.
+      </p>
+    </Section>
 
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    1. "Pay Only For Joined Workers" Refund Rule
-                  </h3>
-                  <ul className="list-disc pl-8 space-y-2">
-                    <li>
-                      If you create a vacancy for 10 workers, but only 5 workers actually join and report for work, you will <strong className="text-gray-900">ONLY</strong> pay for those 5 workers.
-                    </li>
-                    <li>
-                      Anytime Global will automatically issue a 100% Full Refund (Worker Wage + Service Fee) to your account for the 5 empty slots.
-                    </li>
-                  </ul>
-                </div>
+    <Section title="3. Client invoices, disputes and refunds">
+      <Bullets
+        items={[
+          <>Any dispute about an invoice must be raised within <strong className="text-gray-900">7 days</strong> of the invoice date, through the company portal or by email to <Blank k="supportEmail" />.</>,
+          "Undisputed amounts must be paid by the due date.",
+          <>If a dispute is upheld, we issue a credit note. The credit is adjusted against the next invoice, or refunded to the Company's bank account within <Blank k="refundDays" /> working days if the Company asks or the relationship has ended.</>,
+          <>If a Company pays more than the amount due, the excess is adjusted against the next invoice or refunded within <Blank k="refundDays" /> working days on request.</>,
+          "Refunds are made only to the bank account from which the payment was received.",
+          <>Late payments may attract interest at <Blank k="latePaymentInterest" />% per month, as set out in the MSA.</>,
+        ]}
+      />
+    </Section>
 
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    2. Refund Received by Company (If Worker Cancels Late)
-                  </h3>
-                  <p className="mb-3">
-                    If a worker accepts your vacancy but cancels late or does a No-Show, Anytime Global protects your business. The penalty charged to the worker is directly <strong className="text-gray-900">credited</strong> to your Company Wallet as a Refund Compensation:
-                  </p>
-                  <ul className="list-disc pl-8 space-y-2">
-                    <li>
-                      Worker cancels more than 24 hours before shift: <strong className="text-gray-900">₹0 Refund</strong> (No penalty to worker, as we have time to find a free replacement).
-                    </li>
-                    <li>
-                      Worker cancels within 24 to 6 hours before shift: Company receives <strong className="text-gray-900">50%</strong> of the Worker's Day 1 Wage as a refund credit.
-                    </li>
-                    <li>
-                      Worker cancels within 6 to 3 hours before shift: Company receives <strong className="text-gray-900">75%</strong> of the Worker's Day 1 Wage as a refund credit.
-                    </li>
-                    <li>
-                      Worker cancels less than 3 hours before shift (or No-Show): Company receives <strong className="text-gray-900">100%</strong> of the Worker's Day 1 Wage directly into the Company Wallet.
-                    </li>
-                  </ul>
-                </div>
+    <Section title="4. Worker wallet withdrawals">
+      <Bullets
+        items={[
+          "Withdrawals go only to your registered primary bank account in your own name.",
+          <>You can withdraw up to <Blank k="withdrawalsPerDay" /> time(s) per day.</>,
+          <>A withdrawal fee of ₹<Blank k="withdrawalFee" /> may apply. The exact fee is shown before you confirm.</>,
+          <>If a transfer fails (for example, because the bank rejects it), the full amount <strong className="text-gray-900">and any fee</strong> go back to your wallet automatically within <Blank k="failedTransferDays" /> working days.</>,
+          "Once a transfer has reached your bank account successfully, it cannot be reversed.",
+          "If wages are credited by mistake (for example, wrong attendance), the excess is adjusted from your future earnings, and you will be told the reason. Deductions will always follow wage laws.",
+        ]}
+      />
+    </Section>
 
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    3. Refund Paid by Company to Worker (If Company Cancels Late)
-                  </h3>
-                  <p className="mb-3">
-                    If you delete, deactivate, or cancel a vacancy after a worker has already joined/accepted it, you must pay a Refund/Compensation to the Worker for blocking their day:
-                  </p>
-                  <ul className="list-disc pl-8 space-y-2">
-                    <li>
-                      You cancel more than 24 hours before shift: <strong className="text-gray-900">₹0 Penalty</strong>. Full 100% refund of your advance payment.
-                    </li>
-                    <li>
-                      You cancel within 24 to 6 hours before shift: <strong className="text-gray-900">50%</strong> of Day 1 Wage will be cut from your balance and paid to the worker.
-                    </li>
-                    <li>
-                      You cancel within 6 to 3 hours before shift: <strong className="text-gray-900">75%</strong> of Day 1 Wage will be cut from your balance and paid to the worker.
-                    </li>
-                    <li>
-                      You cancel less than 3 hours before shift (or after shift starts): <strong className="text-gray-900">100%</strong> of Day 1 Wage + Travel/Conveyance Charges will be cut from your balance and paid to the worker because they lost their daily livelihood.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </section>
+    <Section title="5. Statutory amounts">
+      <p>
+        EPF, ESIC and other statutory contributions deposited with the government cannot be refunded
+        by ATW. Any correction is made through the relevant government process.
+      </p>
+    </Section>
 
-            {/* Section 2: WORKER REFUND & PENALTY POLICY */}
-            <section className="border-b border-gray-150 pb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
-                2. WORKER REFUND & PENALTY POLICY
-              </h2>
-              <p className="mb-4">
-                Welcome to Anytime Global Pvt. Ltd. This policy protects your daily earnings. If a company cancels a vacancy late, you get a refund payout. However, if you cancel a job late, a penalty will be cut from your wallet and sent to the company.
-              </p>
+    <section className="bg-gray-100 p-6 md:p-8 rounded-2xl">
+      <h2 className="text-2xl font-bold text-gray-900 mb-4">6. How to ask for a refund</h2>
+      <p>
+        Email <Blank k="supportEmail" /> or use Help in the app with your invoice number or
+        transaction ID. We will reply within <Blank k="refundReplyDays" /> working days. If you are
+        not satisfied, use our <Link to="/grievance" className={linkClass}>Grievance page</Link>.
+      </p>
+    </section>
 
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    1. Refund Received by Worker (If Company Cancels Late)
-                  </h3>
-                  <p className="mb-3">
-                    If you accept a vacancy and the Company deletes, deactivates, or cancels it late, the Company will pay you a Refund/Compensation directly into your Worker Wallet:
-                  </p>
-                  <ul className="list-disc pl-8 space-y-2">
-                    <li>
-                      Company cancels more than 24 hours before shift: <strong className="text-gray-900">₹0 Refund</strong> (No compensation, you can join other vacancies).
-                    </li>
-                    <li>
-                      Company cancels within 24 to 6 hours before shift: You receive <strong className="text-gray-900">50%</strong> of Day 1 Wage as a refund payout for blocking your day.
-                    </li>
-                    <li>
-                      Company cancels within 6 to 3 hours before shift: You receive <strong className="text-gray-900">75%</strong> of Day 1 Wage as a refund payout.
-                    </li>
-                    <li>
-                      Company cancels less than 3 hours before shift (or after you reach): You receive <strong className="text-gray-900">100%</strong> of Day 1 Wage + Travel/Conveyance Expenses paid directly to your wallet.
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    2. Penalty Deducted from Worker (If You Cancel Late)
-                  </h3>
-                  <p className="mb-3">
-                    If you accept a vacancy but fail to report to work or cancel late, money will be deducted from your Worker Wallet and paid to the Company as a refund for disturbing their business:
-                  </p>
-                  <ul className="list-disc pl-8 space-y-2">
-                    <li>
-                      You cancel more than 24 hours before shift: <strong className="text-gray-900">₹0 Deduction</strong>. Safe to cancel.
-                    </li>
-                    <li>
-                      You cancel within 24 to 6 hours before shift: <strong className="text-gray-900">50%</strong> of Day 1 Wage will be cut from your wallet.
-                    </li>
-                    <li>
-                      You cancel within 6 to 3 hours before shift: <strong className="text-gray-900">75%</strong> of Day 1 Wage will be cut from your wallet.
-                    </li>
-                    <li>
-                      You cancel less than 3 hours before shift (or No-Show): <strong className="text-gray-900">100%</strong> of Day 1 Wage + Travel Charges will be cut from your wallet, and your account may be permanently blocked.
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    3. Important Wallet Rules
-                  </h3>
-                  <ul className="list-disc pl-8 space-y-2">
-                    <li>
-                      <strong className="text-gray-900">Minus (-) Wallet Balance:</strong> If your Worker Wallet goes into Minus (-) due to a cancellation penalty, this amount will be automatically cut from your very next job earnings or payouts.
-                    </li>
-                    <li>
-                      <strong className="text-gray-900">Leaving Mid-Way:</strong> If you leave the workplace in the middle of a shift without informing the manager, you will get <strong className="text-gray-900">₹0 wage</strong>, and a 100% penalty will be cut from your wallet.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Help & Complaints Section */}
-            <section className="bg-gray-100 p-6 md:p-8 rounded-2xl">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Help & Complaints
-              </h2>
-              <p className="mb-6">
-                If a Company or a Worker feels that any refund calculation or wallet penalty made by Anytime Global is incorrect or unfair, you can lodge an official complaint step-by-step:
-              </p>
-              <div className="space-y-4">
-                <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                  <h4 className="font-bold text-gray-900">Level 1 (Response within 4 hours)</h4>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Email: <a href="mailto:hello@anytime.in" className="text-blue-600 hover:underline">hello@anytime.in</a> | Phone: 08069824660
-                  </p>
-                </div>
-                <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                  <h4 className="font-bold text-gray-900">Level 2 (Response within 48 hours)</h4>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Email: <a href="mailto:grievance@anytime.in" className="text-blue-600 hover:underline">grievance@anytime.in</a> | Phone: 08069824660
-                  </p>
-                </div>
-                <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                  <h4 className="font-bold text-gray-900">Level 3 (Response within 6 days from CEO Office)</h4>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Email: <a href="mailto:ceo-office@anytime.in" className="text-blue-600 hover:underline">ceo-office@anytime.in</a> | Phone: 08069824660
-                  </p>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-      <LeadingFooter />
-    </>
-  );
-};
+    <Section title="7. Language">
+      <p>
+        If there is any difference between language versions of this policy, the English version
+        applies.
+      </p>
+    </Section>
+  </LegalLayout>
+);
 
 export default RefundPolicy;

@@ -31,7 +31,7 @@
 
 //             <div className="space-y-3 text-sm">
 //               <div className="flex items-center gap-3">
-//                 <MapPin size={18} className="text-green-400" />
+//                 <MapPin size={18} className="text-green-400 flex-shrink-0" />
 
 //                 <span>{settings?.office_address}</span>
 //               </div>
@@ -185,7 +185,7 @@ const Footer = () => {
 
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-3">
-                <MapPin size={18} className="text-green-400" />
+                <MapPin size={18} className="text-green-400 flex-shrink-0" />
                 <span>{settings?.office_address}</span>
               </div>
 
@@ -204,29 +204,19 @@ const Footer = () => {
           <div className="flex flex-col">
             <h3 className="text-xl font-semibold align-center">Support & Legal</h3>
             <ul className="py-6 text-sm leading-7 space-y-2">
-                <li>
-                  <Link to="/privacy" className="hover:text-green-400 transition-colors duration-300">
-                    Privacy Policy
-                  </Link>
-                </li>
-
-                <li>
-                  <Link to="/terms" className="hover:text-green-400 transition-colors duration-300">
-                    Terms & Conditions
-                  </Link>
-                </li>
-
-                <li>
-                  <Link to="/cancellation-policy" className="hover:text-green-400 transition-colors duration-300">
-                    Cancellation Policy
-                  </Link>
-                </li>
-
-                <li>
-                  <Link to="/refund-policy" className="hover:text-green-400 transition-colors duration-300">
-                    Refund Policy
-                  </Link>
-                </li>
+                {[
+                  { to: "/terms", label: "Terms & Conditions" },
+                  { to: "/privacy", label: "Privacy Policy" },
+                  { to: "/refund-policy", label: "Refund & Cancellation Policy" },
+                  { to: "/cookies", label: "Cookie Policy" },
+                  { to: "/grievance", label: "Grievance Redressal" },
+                ].map(({ to, label }) => (
+                  <li key={to}>
+                    <Link to={to} className="hover:text-green-400 transition-colors duration-300">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
 
           </div>
